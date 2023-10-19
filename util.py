@@ -56,10 +56,10 @@ def estimate_beats_spectral_flux(audio_path, hop_length=512):
     """
 
     y, sr = librosa.load(audio_path, sr = None)
-    activation = librosa.onset.onset_strength(y=y, sr=sr, hop_length = hop_length) #calculating spectral flux
-    plp = librosa.beat.plp(y=y, sr=sr, hop_length = hop_length, onset_envelope = activation) #calculating plp
-    beat_plp = librosa.util.localmax(plp) # obtaining a boolean array identifying max and non max values
-    beat_plp = np.where(beat_plp)[0] # retaining indices (in frames) of only true values
+    activation = librosa.onset.onset_strength(y=y, sr=sr, hop_length = hop_length) 
+    plp = librosa.beat.plp(y=y, sr=sr, hop_length = hop_length, onset_envelope = activation)
+    beat_plp = librosa.util.localmax(plp) 
+    beat_plp = np.where(beat_plp)[0] 
     beat_times = librosa.frames_to_time(beat_plp, sr=sr, hop_length=hop_length)
 
     return beat_times, activation
@@ -235,4 +235,28 @@ def sonify_track_data(track_id, estimated_beats, tracks_dictionary):
         While the function doesn't return any values, it displays the audio clips 
         for playback in the environment (e.g., Jupyter notebook).
     """
-    pass
+    
+    audio_path = tracks_dictionary[track_id].audio_path
+    audio, sr = librosa.load(audio_path, sr=None)
+    
+    
+    estimated_beat_times = estimated_beats[track_id]
+    
+    
+    estimated_clicks = mir_eval.sonify.clicks(estimated_beat_times, sr=sr)
+    reference_clicks = mir_eval.sonify.clicks(tracks_dictionary[track_id].beats.times, sr=sr)
+    
+   
+    min_length = min(len(audio), len(estimated_clicks), len(reference_clicks))
+    audio = audio[:min_length]
+    estimated_clicks = estimated_clicks[:min_length]
+    reference_clicks = reference_clicks[:min_length]
+    
+    
+    audio_with_estimated_clicks = audio + estimated_clicks
+    audio_with_reference_clicks = audio + reference_clicks
+    
+   
+    display(Audio(audio_with_estimated_clicks, rate=sr))
+    display(Audio(audio_with_reference_clicks, rate=sr))
+
