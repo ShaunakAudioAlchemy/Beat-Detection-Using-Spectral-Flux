@@ -18,3 +18,18 @@ compute_time_sf: A utility function to compute the time axis corresponding to th
 compute_time_ml: A utility function to compute the time axis corresponding to the machine learning activation function novelty curve, given the novelty curve and its sampling rate.
 
 sonify_track_data: This function is designed to sonify (audify) the estimated beats for a specific track in the GTZAN dataset. It generates audio clips with click sounds at both the estimated and reference beats, allowing you to audibly compare the two.
+
+
+**RESULTS**
+
+<img width="442" alt="Screen Shot 2023-10-18 at 4 20 07 PM" src="https://github.com/ShaunakAudioAlchemy/Beat-Detection-Using-Spectral-Flux/assets/136633626/5dc47320-681f-43f6-841d-0d97f7c1eeb2">
+
+
+<img width="879" alt="Screen Shot 2023-10-18 at 4 20 15 PM" src="https://github.com/ShaunakAudioAlchemy/Beat-Detection-Using-Spectral-Flux/assets/136633626/afc37015-7394-4825-8793-64d874a58e37">
+
+
+<img width="878" alt="Screen Shot 2023-10-18 at 4 20 23 PM" src="https://github.com/ShaunakAudioAlchemy/Beat-Detection-Using-Spectral-Flux/assets/136633626/afec7109-29bd-4276-b5c9-2acbd2750344">
+
+
+
+
